@@ -1,6 +1,10 @@
 <template>
   <div id="app">
-    <Kanban :data="data" :create_task_submit="create_task_submit"/>
+    <Kanban
+      :data="data"
+      :create_task_submit="create_task_submit"
+      :move_item_task="move_item_task"
+    />
   </div>
 </template>
 
@@ -18,35 +22,43 @@ export default {
         {
           name: "todo",
           color: "#82E0AA",
-          tasks:[{
-            task_name: "test"
-          },
+          tasks: [
+            {
+              task_name: "test",
+            },
           ],
         },
         {
           name: "doing",
           color: "#F7DC6F",
-          tasks:[{
-            task_name: "test"
-          },
+          tasks: [
+            {
+              task_name: "test",
+            },
           ],
         },
         {
           name: "done",
           color: "#F1948A",
-          tasks:[{
-            task_name: "test"
-          },
+          tasks: [
+            {
+              task_name: "test",
+            },
           ],
         },
       ],
     };
   },
-  methods:{
-    create_task_submit(column_index,item){
-      this.data[column_index].tasks.push(item)
-    }
-  }
+  methods: {
+    create_task_submit(column_index, item) {
+      this.data[column_index].tasks.push(item);
+    },
+    move_item_task(column_a, index_task_a, column_b, index_task_b) {
+      var item = this.data[column_a].tasks[index_task_a];
+      this.data[column_a].tasks.splice(index_task_a, 1);
+      this.data[column_b].tasks.splice(index_task_b, 0,);
+    },
+  },
 };
 </script>
 
